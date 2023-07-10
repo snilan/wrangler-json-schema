@@ -28,7 +28,7 @@ const Rule = Type.Object({
     Type.Literal("Data"),
   ]),
   globs: Type.Array(Type.String()),
-  falltrhough: Type.Optional(Type.Boolean()),
+  fallthrough: Type.Optional(Type.Boolean()),
 })
 
 const CustomBuild = Type.Object({
