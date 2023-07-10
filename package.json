@@ -1,17 +1,18 @@
 {
-  "name": "typescript-starter",
+  "name": "wrangler-json-schema",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx --experimental-fetch src/index.ts"
+    "dev": "tsx src/index.ts -o wrangler.schema.json"
   },
+  "type": "module",
   "keywords": [],
   "author": "Sean Nilan",
   "license": "ISC",
   "devDependencies": {
-    "@tsconfig/node18": "^1.0.1",
-    "@types/node": "^18.14.6",
+    "@tsconfig/node18": "^1.0.3",
+    "@types/node": "^18.16.19",
     "tsx": "^3.12.7",
     "typescript": "^4.9.5"
   }
