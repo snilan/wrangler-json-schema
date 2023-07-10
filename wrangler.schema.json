@@ -1,0 +1,741 @@
+{
+  "$id": "T0",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "main": {
+      "type": "string"
+    },
+    "compatibility_date": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "instanceOf": "Date"
+        }
+      ]
+    },
+    "account_id": {
+      "type": "string"
+    },
+    "compatibility_flags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "workers_dev": {
+      "type": "boolean"
+    },
+    "route": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "pattern": {
+              "type": "string"
+            },
+            "zone_id": {
+              "type": "string"
+            },
+            "custom_domain": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "pattern",
+            "zone_id"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "pattern": {
+              "type": "string"
+            },
+            "zone_name": {
+              "type": "string"
+            },
+            "custom_domain": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "pattern",
+            "zone_name"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "pattern": {
+              "type": "string"
+            },
+            "custom_domain": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "pattern"
+          ]
+        }
+      ]
+    },
+    "routes": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "pattern": {
+                "type": "string"
+              },
+              "zone_id": {
+                "type": "string"
+              },
+              "custom_domain": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "pattern",
+              "zone_id"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "pattern": {
+                "type": "string"
+              },
+              "zone_name": {
+                "type": "string"
+              },
+              "custom_domain": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "pattern",
+              "zone_name"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "pattern": {
+                "type": "string"
+              },
+              "custom_domain": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "pattern"
+            ]
+          }
+        ]
+      }
+    },
+    "tsconfig": {
+      "type": "string"
+    },
+    "triggers": {
+      "type": "object",
+      "properties": {
+        "crons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "crons"
+      ]
+    },
+    "usage_model": {
+      "anyOf": [
+        {
+          "const": "Bundled",
+          "type": "string"
+        },
+        {
+          "const": "Unbound",
+          "type": "string"
+        }
+      ]
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "anyOf": [
+              {
+                "const": "ESModule",
+                "type": "string"
+              },
+              {
+                "const": "CommonJS",
+                "type": "string"
+              },
+              {
+                "const": "CompiledWasm",
+                "type": "string"
+              },
+              {
+                "const": "Text",
+                "type": "string"
+              },
+              {
+                "const": "Data",
+                "type": "string"
+              }
+            ]
+          },
+          "globs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "falltrhough": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "type",
+          "globs"
+        ]
+      }
+    },
+    "build": {
+      "type": "object",
+      "properties": {
+        "command": {
+          "type": "string"
+        },
+        "cwd": {
+          "type": "string"
+        },
+        "watch_dir": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          ]
+        }
+      },
+      "required": [
+        "command"
+      ]
+    },
+    "no_bundle": {
+      "type": "boolean"
+    },
+    "minify": {
+      "type": "boolean"
+    },
+    "node_compat": {
+      "type": "boolean"
+    },
+    "send_metrics": {
+      "type": "boolean"
+    },
+    "keep_vars": {
+      "type": "boolean"
+    },
+    "logpush": {
+      "type": "boolean"
+    },
+    "define": {
+      "type": "object",
+      "patternProperties": {
+        "^(.*)$": {
+          "type": "string"
+        }
+      }
+    },
+    "vars": {
+      "type": "object",
+      "patternProperties": {
+        "^(.*)$": {
+          "type": "string"
+        }
+      }
+    },
+    "d1_databases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "binding": {
+            "type": "string"
+          },
+          "database_name": {
+            "type": "string"
+          },
+          "database_id": {
+            "type": "string"
+          },
+          "preview_database_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "binding",
+          "database_name",
+          "database_id"
+        ]
+      }
+    },
+    "durable_objects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "class_name": {
+            "type": "string"
+          },
+          "script_name": {
+            "type": "string"
+          },
+          "environment": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "class_name"
+        ]
+      }
+    },
+    "migrations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "tag": {
+            "type": "string"
+          },
+          "new_classes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "renamed_classes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "from": {
+                  "type": "string"
+                },
+                "to": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "from",
+                "to"
+              ]
+            }
+          },
+          "deleted_classes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "tag"
+        ]
+      }
+    },
+    "kv_namespaces": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "binding": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "preview_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "binding",
+          "id"
+        ]
+      }
+    },
+    "r2_buckets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "binding": {
+            "type": "string"
+          },
+          "bucket_name": {
+            "type": "string"
+          },
+          "preview_bucket_name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "binding",
+          "bucket_name"
+        ]
+      }
+    },
+    "services": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "binding": {
+            "type": "string"
+          },
+          "service": {
+            "type": "string"
+          },
+          "environment": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "binding",
+          "service"
+        ]
+      }
+    },
+    "queues": {
+      "type": "object",
+      "properties": {
+        "producers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "binding": {
+                "type": "string"
+              },
+              "queue": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "binding",
+              "queue"
+            ]
+          }
+        },
+        "consumers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "queue": {
+                "type": "string"
+              },
+              "max_batch_size": {
+                "type": "number"
+              },
+              "max_batch_timeout": {
+                "type": "number"
+              },
+              "max_retries": {
+                "type": "number"
+              },
+              "dead_letter_queue": {
+                "type": "string"
+              },
+              "max_concurrency": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "queue"
+            ]
+          }
+        }
+      }
+    },
+    "analytics_engine_datasets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "binding": {
+            "type": "string"
+          },
+          "dataset": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "binding"
+        ]
+      }
+    },
+    "mlts_certificates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "binding": {
+            "type": "string"
+          },
+          "certificate_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "binding",
+          "certificate_id"
+        ]
+      }
+    },
+    "send_email": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "const": "send_email",
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "desination_address": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "name",
+              "desination_address"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "const": "send_email",
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "allowed_destination_addresses": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "type",
+              "name",
+              "allowed_destination_addresses"
+            ]
+          }
+        ]
+      }
+    },
+    "tail_consumers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "service": {
+            "type": "string"
+          },
+          "environment": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "service"
+        ]
+      }
+    },
+    "constellation": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "binding": {
+            "type": "string"
+          },
+          "project_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "binding",
+          "project_id"
+        ]
+      }
+    },
+    "browser": {
+      "type": "object",
+      "properties": {
+        "binding": {
+          "type": "string"
+        },
+        "type": {
+          "const": "browser",
+          "type": "string"
+        }
+      },
+      "required": [
+        "binding",
+        "type"
+      ]
+    },
+    "dispatch_namespaces": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "binding": {
+            "type": "string"
+          },
+          "namespace": {
+            "type": "string"
+          },
+          "outbound": {
+            "type": "object",
+            "properties": {
+              "service": {
+                "type": "string"
+              },
+              "parameters": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "service",
+              "parameters"
+            ]
+          }
+        },
+        "required": [
+          "binding",
+          "namespace"
+        ]
+      }
+    },
+    "dev": {
+      "type": "object",
+      "properties": {
+        "ip": {
+          "type": "string"
+        },
+        "port": {
+          "type": "number"
+        },
+        "local_protocol": {
+          "anyOf": [
+            {
+              "const": "http",
+              "type": "string"
+            },
+            {
+              "const": "https",
+              "type": "string"
+            }
+          ]
+        },
+        "upstream_protocol": {
+          "anyOf": [
+            {
+              "const": "http",
+              "type": "string"
+            },
+            {
+              "const": "https",
+              "type": "string"
+            }
+          ]
+        },
+        "host": {
+          "type": "string"
+        }
+      }
+    },
+    "site": {
+      "type": "object",
+      "properties": {
+        "bucket": {
+          "type": "string"
+        },
+        "include": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "exclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "bucket"
+      ]
+    },
+    "env": {
+      "type": "object",
+      "patternProperties": {
+        "^(.*)$": {
+          "$ref": "T0"
+        }
+      }
+    }
+  },
+  "required": [
+    "name",
+    "main",
+    "compatibility_date"
+  ]
+}

@@ -1,5 +1,5 @@
 import { Static, Type } from "@sinclair/typebox"
-import fs from "fs/promises"
+import { promises as fs } from "node:fs"
 const filename = "wrangler-types.json"
 
 const Route = Type.Union([
@@ -224,10 +224,7 @@ const WorkerConfig = Type.Recursive((Config) =>
   })
 )
 
+// WorkerConfig.$schema = "http://json-schema.org/draft-07/schema#"
+
 const file_name = process.argv[2] || "wrangler.schema.json"
 await fs.writeFile(file_name, JSON.stringify(WorkerConfig, null, 2))
-
-// const writeToFile = async (file_name: string) => {
-// };
-
-// writeToFile('wrangler.schema.json');
