@@ -161,61 +161,65 @@ const WorkerSite = T.Object({
   exclude: T.Optional(T.Array(T.String())),
 })
 
-const WorkerConfig = T.Recursive((Config) =>
+const EnvConfig = T.Object({
+  name: T.String(),
+  main: T.String(),
+  compatibility_date: T.Union([T.String(), T.Date()]),
+  account_id: T.Optional(T.String()),
+  compatibility_flags: T.Optional(T.Array(T.String())),
+  workers_dev: T.Optional(T.Boolean()),
+  route: T.Optional(Route),
+  routes: T.Optional(T.Array(Route)),
+  tsconfig: T.Optional(T.String()),
+  triggers: T.Optional(
+    T.Object({
+      crons: T.Array(T.String()),
+    })
+  ),
+  usage_model: T.Optional(
+    T.Union([T.Literal("Bundled"), T.Literal("Unbound")])
+  ),
+  rules: T.Optional(T.Array(Rule)),
+  build: T.Optional(CustomBuild),
+  no_bundle: T.Optional(T.Boolean()),
+  minify: T.Optional(T.Boolean()),
+  node_compat: T.Optional(T.Boolean()),
+  send_metrics: T.Optional(T.Boolean()),
+  keep_vars: T.Optional(T.Boolean()),
+  logpush: T.Optional(T.Boolean()),
+  define: T.Optional(T.Record(T.String(), T.String())),
+  vars: T.Optional(T.Record(T.String(), T.String())),
+  d1_databases: T.Optional(T.Array(D1Binding)),
+  durable_objects: T.Optional(T.Array(DurableObjectBinding)),
+  migrations: T.Optional(T.Array(DurableObjectMigration)),
+  kv_namespaces: T.Optional(T.Array(KVBinding)),
+  r2_buckets: T.Optional(T.Array(R2BucketBinding)),
+  services: T.Optional(T.Array(ServiceBinding)),
+  queues: T.Optional(
+    T.Object({
+      producers: T.Optional(T.Array(QueueProducerBinding)),
+      consumers: T.Optional(T.Array(QueueConsumerBinding)),
+    })
+  ),
+  analytics_engine_datasets: T.Optional(
+    T.Array(AnalyticsEngineDatasetBinding)
+  ),
+  mlts_certificates: T.Optional(T.Array(MTLSCertificateBinding)),
+  send_email: T.Optional(T.Array(SendEmailBinding)),
+  tail_consumers: T.Optional(T.Array(TailConsumerBinding)),
+  constellation: T.Optional(T.Array(ConstellationBinding)),
+  browser: T.Optional(BrowserBinding),
+  dispatch_namespaces: T.Optional(T.Array(DispatchNamespace)),
+  dev: T.Optional(DevelopmentSettings),
+  site: T.Optional(WorkerSite),
+})
+
+const WorkerConfig = T.Intersect([
+  EnvConfig,
   T.Object({
-    name: T.String(),
-    main: T.String(),
-    compatibility_date: T.Union([T.String(), T.Date()]),
-    account_id: T.Optional(T.String()),
-    compatibility_flags: T.Optional(T.Array(T.String())),
-    workers_dev: T.Optional(T.Boolean()),
-    route: T.Optional(Route),
-    routes: T.Optional(T.Array(Route)),
-    tsconfig: T.Optional(T.String()),
-    triggers: T.Optional(
-      T.Object({
-        crons: T.Array(T.String()),
-      })
-    ),
-    usage_model: T.Optional(
-      T.Union([T.Literal("Bundled"), T.Literal("Unbound")])
-    ),
-    rules: T.Optional(T.Array(Rule)),
-    build: T.Optional(CustomBuild),
-    no_bundle: T.Optional(T.Boolean()),
-    minify: T.Optional(T.Boolean()),
-    node_compat: T.Optional(T.Boolean()),
-    send_metrics: T.Optional(T.Boolean()),
-    keep_vars: T.Optional(T.Boolean()),
-    logpush: T.Optional(T.Boolean()),
-    define: T.Optional(T.Record(T.String(), T.String())),
-    vars: T.Optional(T.Record(T.String(), T.String())),
-    d1_databases: T.Optional(T.Array(D1Binding)),
-    durable_objects: T.Optional(T.Array(DurableObjectBinding)),
-    migrations: T.Optional(T.Array(DurableObjectMigration)),
-    kv_namespaces: T.Optional(T.Array(KVBinding)),
-    r2_buckets: T.Optional(T.Array(R2BucketBinding)),
-    services: T.Optional(T.Array(ServiceBinding)),
-    queues: T.Optional(
-      T.Object({
-        producers: T.Optional(T.Array(QueueProducerBinding)),
-        consumers: T.Optional(T.Array(QueueConsumerBinding)),
-      })
-    ),
-    analytics_engine_datasets: T.Optional(
-      T.Array(AnalyticsEngineDatasetBinding)
-    ),
-    mlts_certificates: T.Optional(T.Array(MTLSCertificateBinding)),
-    send_email: T.Optional(T.Array(SendEmailBinding)),
-    tail_consumers: T.Optional(T.Array(TailConsumerBinding)),
-    constellation: T.Optional(T.Array(ConstellationBinding)),
-    browser: T.Optional(BrowserBinding),
-    dispatch_namespaces: T.Optional(T.Array(DispatchNamespace)),
-    dev: T.Optional(DevelopmentSettings),
-    site: T.Optional(WorkerSite),
-    env: T.Optional(T.Record(T.String(), T.Omit(Config, ["env"]))),
-  })
-)
+    env: T.Optional(T.Record(T.String(), EnvConfig)),
+  }),
+])
 
 WorkerConfig.$schema = "http://json-schema.org/draft-07/schema#"
 
